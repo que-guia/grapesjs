@@ -645,7 +645,7 @@ define(function(require) {
 
         // Check if the target could accept the element to be DROPPED inside
         var accepted = 1;
-        var droppable = targetModel ? targetModel.get('droppable') : 1;
+        var droppable = targetModel ? targetModel.get('droppable') || ($dst.data('droppable') || false) : 1;
         var toDrop = draggable;
         if(droppable instanceof Array) {
           // When I drag blocks src is the HTMLElement of the block
