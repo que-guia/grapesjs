@@ -10,6 +10,7 @@ define(['backbone', 'backboneUndo', 'keymaster', 'Utils', 'StorageManager', 'Dev
 
       defaults: {
         clipboard: null,
+        designerMode: false,
         selectedComponent: null,
         previousModel: null,
         changesCount:  0,
@@ -36,7 +37,7 @@ define(['backbone', 'backboneUndo', 'keymaster', 'Utils', 'StorageManager', 'Dev
           M.onLoad();
         });
 
-        this.initUndoManager(); // Is already called (inside components and css composer)
+        this.initUndoManager();
 
         this.on('change:selectedComponent', this.componentSelected, this);
         this.on('change:changesCount', this.updateBeforeUnload, this);
@@ -413,6 +414,7 @@ define(['backbone', 'backboneUndo', 'keymaster', 'Utils', 'StorageManager', 'Dev
 
         sm.store(store, clb);
         this.set('changesCount', 0);
+        this.trigger('storage:store', store);
 
         return store;
       },
@@ -437,7 +439,7 @@ define(['backbone', 'backboneUndo', 'keymaster', 'Utils', 'StorageManager', 'Dev
        * @return {Object}
        * @private
        */
-      getCacheLoad: function(force){
+      getCacheLoad: function(force) {
         var f = force ? 1 : 0;
         if(this.cacheLoad && !f)
           return this.cacheLoad;
@@ -457,6 +459,7 @@ define(['backbone', 'backboneUndo', 'keymaster', 'Utils', 'StorageManager', 'Dev
         });
 
         this.cacheLoad = sm.load(load);
+        this.trigger('storage:load', this.cacheLoad);
         return this.cacheLoad;
       },
 

@@ -2,6 +2,7 @@
  *
  * * [add](#add)
  * * [get](#get)
+ * * [has](#has)
  *
  * You can init the editor with all necessary commands via configuration
  *
@@ -145,9 +146,7 @@ define(function(require) {
               return;
             }
 
-
             var toolbarEl = ed.Canvas.getToolbarEl();
-            var toolbarDisplay = toolbarEl.style.display;
             var cmdMove = ed.Commands.get('move-comp');
 
             cmdMove.onEndMoveFromModel = function() {
@@ -201,7 +200,7 @@ define(function(require) {
        * var myCommand = commands.get('myCommand');
        * myCommand.run();
        * */
-      get: function(id){
+      get: function(id) {
         var el = commands[id];
 
         if(typeof el == 'function'){
@@ -210,6 +209,15 @@ define(function(require) {
         }
 
         return el;
+      },
+
+      /**
+       * Check if command exists
+       * @param	{string}	id Command's ID
+       * @return {Boolean}
+       * */
+      has: function(id) {
+        return !!commands[id];
       },
 
       /**

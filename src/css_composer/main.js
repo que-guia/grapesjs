@@ -107,17 +107,18 @@ define(function(require) {
          * @param {Object} data Object of data to load
          * @return {Object} Loaded rules
          */
-        load: function(data){
+        load: function(data) {
           var d = data || '';
           if(!d && c.stm)
             d = c.em.getCacheLoad();
           var obj = '';
-          if(d.style){
+          if(d.styles) {
             try{
-              obj =  JSON.parse(d.style);
+              obj =  JSON.parse(d.styles);
             }catch(err){}
-          }else if(d.css)
+          } else if (d.css) {
             obj = c.em.get('Parser').parseCss(d.css);
+          }
 
           if(obj)
             rules.reset(obj);
@@ -164,12 +165,12 @@ define(function(require) {
           var s = state || '';
           var w = width || '';
           var opt = opts || {};
-          var rule = this.get(selectors, s, w);
+          var rule = this.get(selectors, s, w, opt);
           if(rule)
             return rule;
           else {
             opt.state = s;
-            opt.maxWidth = w;
+            opt.mediaText = w;
             opt.selectors = '';
             rule = new CssRule(opt);
             rule.get('selectors').add(selectors);
@@ -183,6 +184,7 @@ define(function(require) {
          * @param {Array<Selector>} selectors Array of selectors
          * @param {String} state Css rule state
          * @param {String} width For which device this style is oriented
+         * @param {Object} ruleProps Other rule props
          * @return  {Model|null}
          * @example
          * var sm = editor.SelectorManager;
@@ -195,12 +197,12 @@ define(function(require) {
          *   color: '#000',
          * });
          * */
-        get: function(selectors, state, width) {
+        get: function(selectors, state, width, ruleProps) {
           var rule = null;
-          rules.each(function(m){
+          rules.each(function(m) {
             if(rule)
               return;
-            if(m.compare(selectors, state, width))
+            if(m.compare(selectors, state, width, ruleProps))
               rule = m;
           });
           return rule;
@@ -243,7 +245,7 @@ define(function(require) {
               newSels.push(selec);
             }
 
-            var model = this.add(newSels, rule.state, rule.maxWidth, rule);
+            var model = this.add(newSels, rule.state, rule.mediaText, rule);
             if (opt.extend) {
               var newStyle = _.extend({}, model.get('style'), rule.style || {});
               model.set('style', newStyle);
