@@ -1803,6 +1803,30 @@ $uploadPadding: 150px 10px;
   display: none;
 }
 
+[id^="preview"] {
+  position: fixed;
+  background: $mainDkColor;
+  padding: 5px;
+  z-index: 0;
+  display: none;
+
+  &:after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid $mainDkColor;
+  }
+
+  img {
+    max-width: 600px;
+    max-height: 600px;
+  }
+}
+
 @keyframes #{$app-prefix}slide-down {
   0% {
     transform: translate(0, -3rem);
