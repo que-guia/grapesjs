@@ -2,11 +2,12 @@
   background-color: rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
   position: absolute;
-  width: (100% - $leftWidth);
+  width: calc(100% - #{$leftWidth} - #{$rightWidth});
   height: 100%;
   bottom: 0;
   left: 0;
   overflow: hidden;
+  margin-left: $rightWidth;
   padding-top: 40px;
   z-index: 1;
 

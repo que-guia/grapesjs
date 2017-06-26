@@ -172,6 +172,11 @@ module.exports = config => {
     DeviceManager: em.get('DeviceManager'),
 
     /**
+     * @property {ComponentsManager}
+     */
+    ComponentsManager: em.get('ComponentsManager'),
+
+    /**
      * @property {RichTextEditor}
      */
     RichTextEditor: em.get('rte'),
@@ -193,6 +198,7 @@ module.exports = config => {
      */
     init() {
       em.init(this);
+
       return this;
     },
 

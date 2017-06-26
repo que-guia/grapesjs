@@ -62,12 +62,23 @@ module.exports = {
       className: 'fa fa-bars',
       command: ola,
       attributes  : { title: 'Open Layer Manager' },
-    },{
-      id: obl,
+    },
+    // {
+    //   id: obl,
+    //   className: 'fa fa-th-large',
+    //   command: obl,
+    //   active: true,
+    //   attributes  : { title: 'Open Blocks' },
+    // }
+    ],
+  },{
+    id: 'components',
+    buttons: [{
+      id: 'components-manager',
       className: 'fa fa-th-large',
-      command: obl,
-      attributes  : { title: 'Open Blocks' },
-    }],
+      command: 'load-component-manager',
+      active: true
+    }]
   }],
 
   // Editor model

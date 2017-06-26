@@ -100,6 +100,7 @@ module.exports = () => {
       defaultCommands['open-blocks'] = require('./view/OpenBlocks');
       defaultCommands['open-assets'] = require('./view/OpenAssets');
       defaultCommands['show-offset'] = require('./view/ShowOffset');
+      defaultCommands['load-component-manager'] = require('./view/ComponentManager');
       defaultCommands.fullscreen = require('./view/Fullscreen');
       defaultCommands.preview = require('./view/Preview');
       defaultCommands.resize = require('./view/Resize');
