@@ -27,9 +27,11 @@ module.exports = Backbone.View.extend({
     this.hidePreview();
     this.config.em.refreshCanvas();
     var sorter = this.config.getSorter();
+    let content = this.model.get('content').replace('{custom-class}', this.model.cid);
+
     sorter.setDragHelper(this.el, e);
     sorter.startSort(this.el);
-    sorter.setDropContent(this.model.get('content'));
+    sorter.setDropContent(content);
     this.doc.on('mouseup', this.onDrop);
   },
 
