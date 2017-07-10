@@ -27,7 +27,8 @@ module.exports = Backbone.View.extend({
     this.hidePreview();
     this.config.em.refreshCanvas();
     var sorter = this.config.getSorter();
-    let content = this.model.get('content').replace('{custom-class}', this.model.cid);
+    let content = this.model.get('content').replace('{custom-class}',
+      this.config.useCustomClass ? this.model.cid : '');
 
     sorter.setDragHelper(this.el, e);
     sorter.startSort(this.el);
@@ -47,18 +48,31 @@ module.exports = Backbone.View.extend({
   displayPreview() {
     if (!this.isVisiblePreview) {
       const id = `preview-${this.model.get('id')}`;
-      const image = this.model.get('previewImage');
-      const top = this.$el[0].offsetTop - 10;
-      const left = this.$el[0].offsetLeft + this.$el[0].offsetWidth + 10;
+      const {description, image} = this.model.get('preview');
+      const space = 10;
+      const blockHeight = 90;
+      const offset = this.$el.offset();
+      const top = offset.top - $(window).scrollTop() - space + blockHeight / 2;
+      const left = offset.left + this.$el[0].offsetWidth + space;
 
       let $preview = this.$el.find(`#${id}`);
 
-      if ($preview.length === 0) {
-        $preview = this.$el.append(`<p id="${id}"><img src="${image}"></p>`);
+      if ($preview.length === 0 && (description || image)) {
+        const $image = image ? `<img src="${image}">` : '';
+        const $description = description ? `<p>${description}</p>` : '';
+
+        // this.$el.append(`<div id="${this.model.get('id')}_caret" class="preview_caret"></div>`);
+        $preview = this.$el.append(`<div id="${id}">${$image}${$description}</div>`);
       }
 
+      const previewHeight = $(`#${id}`).height();
+
+      // $(`#${this.model.get('id')}_caret`)
+      //   .css('display', 'block')
+      //   .fadeIn('fast');
+
       $(`#${id}`)
-        .css('top', `${top}px`)
+        .css('top', `${Math.max(top - previewHeight / 2, 42)}px`)
         .css('left', `${left}px`)
         .css('display', 'block')
         .fadeIn('fast');
@@ -73,6 +87,8 @@ module.exports = Backbone.View.extend({
 
     if ($preview.length === 1) {
       $(`#${id}`).css('display', 'none');
+      // $(`#${id}_caret`)
+      //   .css('display', 'none')
     }
 
     this.isVisiblePreview = false;

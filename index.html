@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>GrapesJS</title>
   <link rel="stylesheet" href="dist/css/grapes.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?v=4.7">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="dist/grapes.min.js"></script>
 
@@ -1244,23 +1245,31 @@
       },
 
       componentsManager: {
+        useCustomClass: true,
         groups: [{
           name: 'Lorem Ipsum A',
           blocks: [{
             id: 'b1',
-            label: '1 Columna',
+            label: '1 Column',
             content: '<div class="{custom-class}">Hello World, I am a component</div>',
+            preview: {
+              description: 'Lorem ipsum sit dolor amet'
+            },
             attributes: { class: 'gjs-fonts gjs-f-b1' }
           }, {
             id: 'b2',
-            label: '1 Columna',
+            label: '1 Column',
             content: '<div>Hello World, I am a component</div>',
+            preview: {
+              description: 'Lorem ipsum sit dolor amet',
+              image: 'https://www.w3schools.com/css/img_fjords.jpg'
+            },
             attributes: { class: 'gjs-fonts gjs-f-b1' }
           }, {
             id: 'b3',
-            label: '1 Columna',
+            label: '1 Column',
             content: '<div>Hello World, I am a component</div>',
-            attributes: { class: 'gjs-fonts gjs-f-b1' }
+            attributes: { class: 'fa fa-id-card-o' }
           }],
           open: true
         }, {
@@ -1269,6 +1278,10 @@
             id: 'b4',
             label: '1 Columna',
             content: '<div>Hello World, I am a component</div>',
+            preview: {
+              description: 'Lorem ipsum sit dolor amet',
+              image: 'https://www.w3schools.com/css/img_fjords.jpg'
+            },
             attributes: { class: 'gjs-fonts gjs-f-b1' }
           }]
         }]

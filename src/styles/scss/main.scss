@@ -1,6 +1,5 @@
 /* stylelint-disable */
 @import "node_modules/spectrum-colorpicker/spectrum";
-@import "node_modules/font-awesome/scss/font-awesome";
 @import "node_modules/codemirror/lib/codemirror";
 @import "node_modules/codemirror/theme/hopscotch";
 
@@ -1265,6 +1264,7 @@ $lightBorder: rgba(255, 255, 255, 0.05);
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  text-align: center;
 }
 
 .#{$app-prefix}block {
@@ -1273,7 +1273,6 @@ $lightBorder: rgba(255, 255, 255, 0.05);
 
   width: 45%;
   padding: 1em;
-  text-align: center;
   box-sizing: border-box;
   height: 90px;
   cursor: all-scroll;
@@ -1282,7 +1281,6 @@ $lightBorder: rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   margin: 10px 2.5% 5px;
@@ -1299,6 +1297,7 @@ $lightBorder: rgba(255, 255, 255, 0.05);
   font-size: 2em;
   line-height: 2em;
   padding: 11px;
+  display: flex;
 }
 
 .#{$app-prefix}block-label {
@@ -1306,6 +1305,7 @@ $lightBorder: rgba(255, 255, 255, 0.05);
   font-size: 0.65rem;
   font-weight: normal;
   font-family: Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .#{$app-prefix}block.#{$app-prefix}bdrag {
@@ -1805,25 +1805,31 @@ $uploadPadding: 150px 10px;
 
 [id^="preview"] {
   position: fixed;
-  background: $mainDkColor;
-  padding: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px;
   z-index: 0;
   display: none;
 
-  &:after {
+  &:before {
     content: '';
     width: 0;
     height: 0;
-    position: absolute;
+    right: 0;
     left: -10px;
+    top: 30%;
+    position: absolute;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid $mainDkColor;
+    border-right: 10px solid rgba(0, 0, 0, 0.7);
   }
 
   img {
-    max-width: 600px;
-    max-height: 600px;
+    max-width: 420px;
+    max-height: 400px;
+  }
+
+  p {
+    font-size: 12px;
   }
 }
 
